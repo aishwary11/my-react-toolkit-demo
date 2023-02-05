@@ -10,7 +10,7 @@ const postSlicer = createSlice({
   name: "post",
   initialState: [],
   extraReducers: builder => {
-    builder.addCase(postInfo.fulfilled, (state, { payload }) => payload);
+    builder.addCase(postInfo.fulfilled, (state, { payload }) => state = payload);
   }
 });
 export default postSlicer.reducer;

@@ -10,7 +10,8 @@ const userSlicer = createSlice({
   name: "user",
   initialState: [],
   extraReducers: builder => {
-    builder.addCase(userInfo.fulfilled, (state, { payload }) => payload);
+    builder.addCase(userInfo.fulfilled, (state, { payload }) => state = payload);
   }
 });
+
 export default userSlicer.reducer;
