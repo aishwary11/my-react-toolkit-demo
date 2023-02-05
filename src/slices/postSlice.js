@@ -1,26 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { axiosInstance, toastSuccess } from "../common/constant";
 
 export const postInfo = createAsyncThunk("get/post", async () => {
-  const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
+  const res = await axiosInstance.get("/posts");
   return res.data;
 });
 
+const initialState = [{
+  id: "",
+  title: ""
+}];
+
 const postSlicer = createSlice({
   name: "post",
-  initialState: [{
-    id: "",
-    title: ""
-  }],
+  initialState,
   extraReducers: builder => {
     builder.addCase(postInfo.fulfilled, (state, { payload }) => {
-      toast("Posts", {
-        autoClose: 3000,
-        type: "success"
-      });
+      toastSuccess("Post Data");
       return state = payload;
+    });
+    builder.addCase(postInfo.rejected, (state) => {
+      toastSuccess("Post Data");
+      return state = initialState;
     });
   }
 });
+
 export default postSlicer.reducer;
