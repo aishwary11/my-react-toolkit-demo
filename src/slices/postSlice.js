@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance, toastSuccess } from "../common/constant";
+import { axiosInstance, toastError, toastSuccess } from "../common/constant";
 
 export const postInfo = createAsyncThunk("get/post", async () => {
   const res = await axiosInstance.get("/posts");
@@ -15,12 +15,16 @@ const postSlicer = createSlice({
   name: "post",
   initialState,
   extraReducers: builder => {
+    builder.addCase(postInfo.pending, (state, { payload }) => {
+      toastSuccess("Post Data Loading");
+      return state = payload;
+    });
     builder.addCase(postInfo.fulfilled, (state, { payload }) => {
       toastSuccess("Post Data");
       return state = payload;
     });
     builder.addCase(postInfo.rejected, (state) => {
-      toastSuccess("Post Data");
+      toastError("Post Error");
       return state = initialState;
     });
   }

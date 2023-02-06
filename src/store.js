@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import logger from 'redux-logger';
 import postReducer from "./slices/postSlice";
 import userReducer from "./slices/userSlice";
 const reducer = {
@@ -7,7 +8,11 @@ const reducer = {
 };
 const store = configureStore({
   reducer,
-  devTools: true
+  devTools: true,
+  /**
+   * @Logger_Middleware
+   */
+  // middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger)
 });
 
 export default store;

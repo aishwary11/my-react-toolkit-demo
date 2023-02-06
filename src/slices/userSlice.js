@@ -15,6 +15,10 @@ const userSlicer = createSlice({
   name: "user",
   initialState,
   extraReducers: builder => {
+    builder.addCase(userInfo.pending, (state, { payload }) => {
+      toastSuccess("User Data Loading");
+      return state = payload;
+    });
     builder.addCase(userInfo.fulfilled, (state, { payload }) => {
       toastSuccess("User Data");
       return state = payload;

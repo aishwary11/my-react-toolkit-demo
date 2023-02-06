@@ -12,15 +12,14 @@ export default function App() {
     dispatch(postInfo());
     dispatch(userInfo());
   }, []);
-  const postSelect = useSelector((state) => state.post);
-  const userSelect = useSelector((state) => state.user);
+  const selectData = useSelector((state) => state);
   return (
     <div className="App">
       <ToastContainer />
       <p>User</p>
-      {userSelect.map((e, i) => <p key={i}>{e.id} {e.name}</p>)}
+      {selectData.user.map((e, i) => <p key={i}>{e.id} {e.name}</p>)}
       <p>Post</p>
-      {postSelect.map((e, i) => <p key={i}>{e.id} {e.title}</p>)}
+      {selectData.post.map((e, i) => <p key={i}>{e.id} {e.title}</p>)}
       <Abouts />
     </div>
   );
