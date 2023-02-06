@@ -8,5 +8,6 @@ const toastConfig = {
   position: toast.POSITION.TOP_RIGHT
 };
 
+export const toastWarn = (msg) => toast.warning(msg, toastConfig);
 export const toastSuccess = (msg) => toast.success(msg, toastConfig);
 export const toastError = (msg) => toast.error(msg, toastConfig);
