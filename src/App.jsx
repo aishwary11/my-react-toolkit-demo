@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import { Abouts } from "./components/About";
 import { postInfo } from "./slices/postSlice";
 import { userInfo } from "./slices/userSlice";
@@ -9,17 +8,21 @@ import { userInfo } from "./slices/userSlice";
 export default function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(postInfo());
-    dispatch(userInfo());
-  }, []);
-  const selectData = useSelector((state) => state);
+    (async () => {
+      await Promise.all([dispatch(postInfo()), dispatch(userInfo())]);
+    })();
+  }, [dispatch]);
+
+  const userData = useSelector((state) => state.user);
+  const postData = useSelector((state) => state.post);
+
   return (
     <div className="App">
       <ToastContainer theme="colored" position="top-right" duration={3000} />
       <p>User</p>
-      {selectData.user.map((e, i) => <p key={i}>{e.id} {e.name}</p>)}
+      {userData.map((e) => <p key={e.id}>{e.id} {e.name}</p>)}
       <p>Post</p>
-      {selectData.post.map((e, i) => <p key={i}>{e.id} {e.title}</p>)}
+      {postData.map((e) => <p key={e.id}>{e.id} {e.title}</p>)}
       <Abouts />
     </div>
   );
