@@ -1,13 +1,11 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 export const axiosInstance = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com"
+  baseURL: "https://jsonplaceholder.typicode.com",
+  timeout: 10000,
+  cancelToken: axios.CancelToken.source().token
 });
-const toastConfig = {
-  autoClose: 3000,
-  position: toast.POSITION.TOP_RIGHT
-};
 
-export const toastWarn = (msg) => toast.warning(msg, toastConfig);
-export const toastSuccess = (msg) => toast.success(msg, toastConfig);
-export const toastError = (msg) => toast.error(msg, toastConfig);
+export const toastWarn = (msg) => toast.warning(msg);
+export const toastSuccess = (msg) => toast.success(msg);
+export const toastError = (msg) => toast.error(msg);

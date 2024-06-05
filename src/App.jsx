@@ -15,7 +15,7 @@ export default function App() {
   const selectData = useSelector((state) => state);
   return (
     <div className="App">
-      <ToastContainer theme="colored" />
+      <ToastContainer theme="colored" position="top-right" duration={3000} />
       <p>User</p>
       {selectData.user.map((e, i) => <p key={i}>{e.id} {e.name}</p>)}
       <p>Post</p>
