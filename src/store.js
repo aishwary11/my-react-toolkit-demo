@@ -12,7 +12,7 @@ const store = configureStore({
   /**
    * @Logger_Middleware
    */
-  // middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger)
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger)
 });
 
 export default store;
